@@ -1,0 +1,360 @@
+---
+title: "Aula 1"
+author: "Renato Rodrigues Silva"
+format: 
+  beamer: 
+    aspectratio: 32
+    navigation: horizontal
+    theme: AnnArbor
+    colortheme: lily
+---
+
+## Bem-vindos(as)!!! {.center}
+
+-   O "Curso de R para ciências jurídicas" foi elaborado com o intuito de proporcionar um conhecimento básico de análise de dados usando o software R.
+
+-   O R é uma linguagem de programação de código aberto amplamente utilizada em análise de dados devido sua flexibilidade e capacidade de integração com outras ferramentas.
+
+-   O curso está sendo oferecido para operadores do direito em geral e acadêmicos de curso de Direito.
+
+## Programação {.center}
+
+::: columns
+::: {.column width="50%"}
+Semana 1 (02/07 e 04/07)
+
+-   02/07: Apresentação e utilização no RPosit Cloud (17:00-19:00)
+-   04/07: Criando objetos no R (17:00-19:00)
+
+Semana 2 (09/07 e 11/07)
+
+-   09/07: Como importar e exportar arquivos no R (17:00-19:00)
+-   11/07: Estatística Descritiva no R (17:00-19:00)
+:::
+
+::: {.column width="50%"}
+Semana 3 (16/07 e 18/07)
+
+-   16/07: Técnicas de Raspagem (17:00-19:00)
+-   18/07: Técnicas de Raspagem (17:00-19:00)
+
+Semana 4 (23/07)
+
+-   30/07: Considerações Finais (17:00-19:00)
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Objetivo da aula {.center}
+
+-   O objetivo da primeira aula é ensinar ao aluno:
+
+-   Como fazer uma conta no Posit Cloud;
+
+-   Como instalar o software Posit Cloud no Windows;
+
+-   Como instalar o software Posit Cloud no MacOS.
+
+------------------------------------------------------------------------
+
+## Roteiro da aula {.center}
+
+-   Introdução
+
+-   Como fazer uma conta no Posit Cloud
+
+-   Breve resumo de sistemas operacionais
+
+-   Como instalar o Posit Studio no computador
+
+------------------------------------------------------------------------
+
+## Introdução {.center}
+
+[![Fluxo da ciência de dados](Aula1_files/figure-html/Fig1.png)](https://r4ds.hadley.nz/intro)
+
+------------------------------------------------------------------------
+
+## Introdução {.center}
+
+-   Precisamos de uma ferramenta computacional para fazermos ciências de dados.
+
+-   Como já sabemos, nesse curso utilizaremos o software R.
+
+-   Podemos instalar esse software gratuitamente da internet ou podemos usá-lo na nuvem.
+
+------------------------------------------------------------------------
+
+## Introdução ao software R {.center}
+
+#### O que é R?
+
+-   R é um ambiente de software livre para computação estatística e gráficos. Compila e roda em uma ampla variedade de plataformas UNIX, Windows e MacOS [(CRAN, 2024)](https://www.r-project.org/about.html)
+
+#### O que é CRAN?
+
+-   A “Rede Comprehensive R Archive” (CRAN) é uma coleção de sites que carregam material idêntico, consistindo na (s) distribuição R, as extensões contribuídas, documentação para R e arquivos binários ([CRAN, 2024](https://www.r-project.org/about.html)).
+
+------------------------------------------------------------------------
+
+## Posit cloud {.center}
+
+-   Posit Cloud é uma plataforma online que permite aos usuários acessar o Rstudio sem a necessidade de instalá-lo no seu computador.
+
+-   Os projetos e arquivos do usuário ficam armazenados na nuvem, ou seja, você pode acessá-los de qualquer lugar e a qualquer momento.
+
+-   Ideal para iniciantes que possam ter dificuldades com instalação de software.
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 1](Aula1_files/figure-html/Fig2.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 2](Aula1_files/figure-html/Fig3.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 3](Aula1_files/figure-html/Fig4.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 4](Aula1_files/figure-html/Fig5.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 5](Aula1_files/figure-html/Fig6.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 6](Aula1_files/figure-html/Fig7.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 7](Aula1_files/figure-html/Fig8.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 8](Aula1_files/figure-html/Fig9.png)
+
+------------------------------------------------------------------------
+
+### Como fazer uma conta no Posit cloud {.center}
+
+![Passo 9](Aula1_files/figure-html/Fig10.png)
+
+------------------------------------------------------------------------
+
+## O que é um sistema operacional {.center}
+
+-   É um software ou conjunto de softwares cuja função é administrar os recursos de um sistema, estabelecendo **a interface entre o computador e o usuário** (TECNOBLOG, 2020)(<https://tecnoblog.net/responde/o-que-e-um-sistema-operacional).>
+
+-   Como exemplo, temos: Microsoft Windows, Mac OS X e Linux.
+
+-   Veremos ao longo do curso alguns aspectos relacionados a instalação de softwares pode ser diferente para cada sistema operacional.
+
+-   No entanto, as linhas de comando do software R são as mesmas, independente do sistema operacional a ser usado.
+
+------------------------------------------------------------------------
+
+## Caminho (Path) {.center}
+
+-   É a forma geral do nome de um arquivo ou diretório, especifica uma localização única em um sistema de arquivos.
+
+Exemplos:
+
+-   Nome do diretório onde está localizado o arquivo dessa aula.
+
+`/Users/renatorodriguessilva/Dropbox/UFG/Extensao_2024/Aulas/Aula1`
+
+------------------------------------------------------------------------
+
+## Caminho absoluto e relativo {.center}
+
+-   Um caminho absoluto aponta para a mesma localização em um sistema de arquivos, independentemente do diretório de trabalho atual.
+
+-   Um caminho relativo inicia a partir de algum diretório de trabalho fornecido, evitando a necessidade de fornecer o caminho absoluto completo.
+
+-   Um nome de arquivo pode ser considerado como um caminho relativo baseado no diretório de trabalho atual.
+
+##### IMPORTANTE !!!
+
+-   Se o diretório de trabalho não for o diretório pai do arquivo (onde o arquivo está localizado), resultará em um erro de arquivo não encontrado se o arquivo for endereçado pelo seu nome.
+
+------------------------------------------------------------------------
+
+## Caminhos no Windows {.center}
+
+a.  `C:\Users\Joao\Documents\Projeto\arquivo.txt`
+    -   Neste exemplo, `C:` é a unidade de disco, e o caminho completo até o arquivo `arquivo.txt` é especificado, incluindo todas as pastas intermediárias.
+b.  `Projeto\arquivo.txt`
+    -   Neste exemplo, se o diretório atual for `C:\Users\Joao\Documents`, o caminho relativo `Projeto\arquivo.txt` aponta para o arquivo `arquivo.txt` dentro da pasta Projeto que está dentro do diretório atual.
+
+------------------------------------------------------------------------
+
+## IMPORTANTE !!! {.center}
+
+-   Caminhos declarados de foma incorreta é uma das maiores fontes de erros durante o aprendizado de softwares estatísticos, principalmente no que tange a leitura dos dados.
+
+-   Minha dica é: aponte o software para um diretório, coloque seus arquivos neste diretório e sempre use apenas o nome do arquivo como caminho relativo.
+
+-   Para achar caminho de um arquivo no Windows, [clique aqui](https://pt.wikihow.com/Encontrar-o-Caminho-de-um-Arquivo-no-Windows).
+
+------------------------------------------------------------------------
+
+## Caminhos no Linux / Mac OS X {.center}
+
+-   Caminho absoluto: Todo caminho absoluto inicia no diretório raiz (/), por exemplo: `/home/aluno`, a partir do qual, todos caminhos absolutos derivam, formando uma árvore de diretórios.
+
+-   Caminho relativo: Todo caminho relativo não contém uma 'barra' no início. A referência é geralmente o diretório atual (pwd) onde o shell se encontra .
+
+-   Maiores detalhes, [clique aqui](https://wiki.sj.ifsc.edu.br/images/4/42/Comandos_B%C3%A1sicos.pdf)
+
+------------------------------------------------------------------------
+
+## Exemplo de Caminhos no Linux / Mac OS X {.center}
+
+a.  `/home/bohlke/programas/testes/arquivo1.blah` é um caminho absoluto para o arquivo. Pode-se alcançar o arquivo1.blah independendo do diretório atual.
+
+b.  `programas/teste/arquivo1.blah` é um caminho relativo para o mesmo arquivo. Só se pode alcançá-lo se estivermos previamente em `/home/bohlke`
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Windows {.center}
+
+![Passo 1](Aula1_files/figure-html/Fig11.png)
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Windows {.center}
+
+![Passo 2](Aula1_files/figure-html/Fig12.png)
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Windows {.center}
+
+![Passo 3](Aula1_files/figure-html/Fig13.png)
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Windows {.center}
+
+-   Clique no arquivo duas vezes com o botão esquerdo. Ele pedirá para você selecionar a linguagem da instalação. Escolha um idioma e clique em OK.
+
+-   Em seguida, clique em Avançar até chegar na tela da imagem abaixo. Nessa etapa, você precisará escolher a pasta de instalação.
+
+-   Continue clicando em Avançar e, ao fim da instalação, em Concluir.
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Mac OS X {.center}
+
+![Passo 1](Aula1_files/figure-html/Fig11.png)
+
+------------------------------------------------------------------------
+
+## Instalação do software R no Mac OS X {.center}
+
+![Passo 2](Aula1_files/figure-html/Fig12b.png)
+
+----
+
+## Instalação do software R no Mac OS X {.center}
+ 
+![Passo 3](Aula1_files/figure-html/Fig13b.png)
+
+----
+
+## Instalação do software R no Mac OS X {.center}
+
+![Passo 4](Aula1_files/figure-html/Fig14.png)
+
+----
+
+## Instalação do software R no Mac OS X {.center}
+
+![Passo 5](Aula1_files/figure-html/Fig15.png)
+
+----
+
+## Instalação do software R no Mac OS X {.center}
+
+![Passo 5](Aula1_files/figure-html/Fig16.png) 
+
+----
+
+
+## Instalação do software R no Mac OS X {.center}
+
+-   Salve o arquivo `.pkg`, clique duas vezes nele para abri-lo e siga as instruções de instalação.
+
+-   Agora que o R está instalado, você precisa baixar e instalar o RStudio.
+
+---
+
+## Instalação de RStudio IDE {.center}
+
+
+![Passo 1](Aula1_files/figure-html/Fig17.png) 
+
+
+----
+
+## Instalação de RStudio IDE {.center}
+
+
+![](Aula1_files/figure-html/Fig18.png)
+
+
+----
+
+## Instalação de RStudio IDE {.center}
+
+
+![](Aula1_files/figure-html/Fig19.png)
+
+----
+
+## Instalação de RStudio IDE {.center}
+
+
+![](Aula1_files/figure-html/Fig20.png)
+
+
+----
+
+## Instalação de RStudio IDE {.center}
+
+
+![](Aula1_files/figure-html/Fig21.png)
+
+----
+
+## Instalação de RStudio IDE (Resumo) {.center}
+
+-   Vá para `https://posit.co/download/rstudio-desktop/`.
+-   Clique em "Download" na seção RStudio Desktop.
+-   Escolha o seu sistema operacional.
+-   Baixe o instalador adequado.
+-   Siga as instruções de instalação para o seu sistema operacional.
+
+
+
