@@ -1,0 +1,332 @@
+---
+title: "Aula 3"
+author: "Renato Rodrigues Silva"
+format:
+  revealjs:
+    smaller: true
+    scrollable: true
+    theme: serif
+---
+
+## Objetivo da aula {.center}
+
+-   O objetivo da aula é ensinar ao aluno importar arquivos no formato:
+
+-   .txt
+
+-   .csv
+
+-   .xls ou xlsx
+
+-   .pdf
+
+------------------------------------------------------------------------
+
+## Ler dados .txt {.center}
+
+-   A função `read.delim()` serve para ler dados separados por tab.
+
+**Obs:** Cuidado ao armazenar grande quantidade de dados! Caso precise, use a biblioteca `data.table!`
+
+------------------------------------------------------------------------
+
+## Função `read.delim()` {.center}
+
+### Principais argumentos da função:
+
+-   file: O nome do arquivo.
+
+-   header: Um valor lógico indicando a existência de um cabeçalho.
+
+-   sep: O caracter separador de campo. Por default é o espaço em branco
+
+-   dec: caracter usado para separar em pontos decimais
+
+-   na.strings: um vetor de strings o qual será interpretado como valor faltante. Espaço em branco são considerados dados faltantes para dados do tipo lógico, inteiros e numéricos.
+
+-   quote: vetor de string para indicar qual símbolo indicará aspas
+
+------------------------------------------------------------------------
+
+## Função `read.delim()` {.center}
+
+### Exemplo `gasconsumption.txt`
+
+-   Para aprendermos ler dados a partir de arquivos .txt, vamos usar dados disponibilizados pelo prof. [Johannes Ledolter](https://www.biz.uiowa.edu/faculty/jledolter/).
+
+-   O conjunto de dados se encontra [aqui](https://www.biz.uiowa.edu/faculty/jledolter/RegressionModeling/Data/Chapter1/gasconsumption.txt).
+
+-   **Dica da aula 1**, antes de começarmos tenha certeza do diretorio onde está o arquivo a ser lido.
+
+-   Todos os arquivos que devem ser lidos foram enviados por email
+
+------------------------------------------------------------------------
+
+## Função `read.delim()` {.center}
+
+### Exemplo `gasconsumption.txt`
+
+-   Os passos para ler o arquivo são:
+
+1.  No painel environment clique no terceiro ícone.
+
+2.  Escolha a opção From text (base) ...
+
+3.  Procure em seu sistemas de arquivos `gasconsumption.txt` e dê duplo clique
+
+![](Aula3_files/figure-html/Fig1.png){fig-align="center" width="450"}
+
+------------------------------------------------------------------------
+
+## Função `read.delim()` {.center}
+
+-   Observe o código que o RStudio gerou no console
+
+-   Isso é uma excelente forma de aprender!!
+
+![](Aula3_files/figure-html/Fig2.png){fig-align="center" width="450"}
+
+------------------------------------------------------------------------
+
+## Função `read.delim()` {.center}
+
+### Exemplo `gasconsumption2.txt`
+
+-   Vamos tentar agora ler o arquivo `gasconsumption2.txt`
+
+-   Eu modfiquei o arquivo e coloquei o nome de `gasconsumption2.txt`. Agora, algumas colunas não estão separadas por tab.
+
+-   Observe que não houve um sucesso na leitura dos dados
+
+------------------------------------------------------------------------
+
+## Função `read.table()` {.center}
+
+-   A função `read.table()` é uma das principais funções do R.
+
+-   Importa dados .txt para memória RAM do computador de uma forma mais genérica que `read.delim()`.
+
+    ##### Principais argumentos da função, além das já mencionadas
+
+-   sep: O caracter separador de campo. Por default é o espaço em branco
+
+-   dec: caracter usado para separar em pontos decimais
+
+-   na.strings: um vetor de strings o qual será interpretado como valor faltante. Espaço em branco são considerados dados faltantes para dados do tipo lógico, inteiros e numéricos.
+
+-   nrow: valor inteiro que indica o máximo de linhas para ser lidos.
+
+-   skip: valor que indica quantas linhas devem ser puladas antes do arquivo começar a ser lido.
+
+------------------------------------------------------------------------
+
+## Função `read.table()` {.center}
+
+### Exemplo `gasconsumption2.txt`
+
+```{r}
+#| eval: true
+#| echo: true
+gasconsumption2 = read.table("gasconsumption2.txt", header = TRUE)
+print(gasconsumption2)
+```
+
+## Ler arquivos .txt com comentários {.center}
+
+-   Eu modifiquei novamente o arquivo original `gasconsumption.txt` e introduzi duas linhas de comentários.
+
+-   Isso é algo bem comum dos dados da vida real.
+
+## Lendo arquivos .txt com comentários {.center}
+
+```{r}
+#| eval: true
+#| echo: true
+gasconsumption3 = read.table("gasconsumption3.txt", header = TRUE, skip=2)
+print(gasconsumption3)
+```
+
+## Ler arquivos .csv {.center}
+
+-   As funções : `read.csv()` e `read.csv2()` funcionam de forma similar a função `read.table()`;
+
+-   `read.csv()`considera a vírgula como separador das colunas e o ponto como separador dos numeros decimais
+
+-   `read.csv2()` considera o ponto e vírgula como separador das colunas e a vírgula como separador dos numeros decimais.
+
+-   Vamos primeiro usar o RStudio para ler arquivos .csv
+
+## Ler arquivos .csv {.center}
+
+### Exemplo `forestfires.csv`
+
+-   O arquivo `forestfires.csv` está no repositório da [UC Irvine.](https://archive.ics.uci.edu/dataset/162/forest+fires)
+
+-   Inicialmente vamos aprender ler arquivos .csv, clicando nos botões da aba environment do painel environment.
+
+![](Aula3_files/figure-html/Fig3.png){fig-align="center" width="450"}
+
+## Ler arquivos .csv {.center}
+
+-   No terceiro ícone da aba environment, escolha a opção From text (readr),
+
+-   Coloque o path ou o endereço onde está o arquivo.
+
+-   Clique em update e depois em import. O link do arquivo pode ser encontrado [aqui](https://archive.ics.uci.edu/ml/machine-learning-databases/forest-fires/forestfires.csv)
+
+## Ler arquivos .csv {.center}
+
+![](Aula3_files/figure-html/Fig4.png){fig-align="center" width="450"}
+
+## Ler arquivos .csv {.center}
+
+![](Aula3_files/figure-html/Fig5.png){fig-align="center" width="450"}
+
+## Ler arquivos .csv {.center}
+
+### Exemple `forestfires2.csv`
+
+-   Eu subsituí vírgula por ponto e vírgula.
+
+-   Repeti quase o mesmo procedimento anterior no RStudio,
+
+-   No entanto, eu localizei o arquivo no meu sistema de arquivos.
+
+-   Observe a saída no R.
+
+## Ler arquivos .csv {.center}
+
+![](Aula3_files/figure-html/Fig6.png){fig-align="center" width="450"}
+
+## Ler arquivos .csv {.center}
+
+-   Observe que teríamos resultados similares, se fizéssemos:
+
+```{r}
+#| echo: true
+#| eval: true
+
+forestfires2 = read.csv2("forestfires2.csv", header=TRUE)
+print(forestfires2)
+
+```
+
+## Ler arquivos .xls {.center}
+
+-   Os exemplos que serão usados estão nesse [endereço](https://readxl.tidyverse.org/)
+
+-   Eu fiz download dos exemplos que estão já na biblioteca para simular situações que podem ocorrer na prática.
+
+-   Vou usar como exemplo o arquivo `clippy.xlsx.`
+
+## Ler arquivos .xls {.center}
+
+![](Aula3_files/figure-html/Fig7.png){fig-align="center" width="450"}
+
+## Ler arquivos .xls {.center}
+
+![](Aula3_files/figure-html/Fig8.png){fig-align="center" width="450"}
+
+## Ler arquivos .xls {.center}
+
+![](Aula3_files/figure-html/Fig9.png){fig-align="center" width="450"}
+
+## Ler arquivos .xls {.center}
+
+![](Aula3_files/figure-html/Fig10.png){fig-align="center" width="450"}
+
+## Ler arquivos .pdf {.center}
+
+-   O material para ler / importar arquivos .pdf pode ser encontrado [aqui](https://library.virginia.edu/data/articles/reading-pdf-files-into-r-for-text-mining)
+
+-   Por questões didáticas, eu vou simplificar o material referenciado.
+
+## Ler arquivos .pdf {.center}
+
+### Contexto
+
+-   Vamos supor que estamos interessados em minerar textos das opiniões da Suprema Corte dos Estados Unidos.
+
+-   As opiniões são publicadas como arquivos PDF na seguinte página web, na seção intitulada 'Opinions of the Court': <https://www.supremecourt.gov/opinions/opinions.aspx>. Para os
+
+-   Para o propósito dessa aula propósitos deste tutorial introdutório, vamos olhar apenas uma opinião do período de 2014: (1) Glossip v. Gross,
+
+-   Para acompanhar aula, baseada fortemente nesse endereço
+
+-   Você pode baixar as opiniões deste link: <https://static.lib.virginia.edu/statlab/materials/data/opinions.zip>.
+
+-   As opiniões estão em um arquivo zip, eu fiz download e já enviei o arquivo por email
+
+## Ler arquivos .pdf {.center}
+
+-   Para começar, instalaremos o pacote pdftools.
+
+-   O pacote pdftools fornece funções para extrair texto de arquivos PDF.
+
+![](Aula3_files/figure-html/Fig11.png){fig-align="center" width="450"}
+
+## Ler arquivos .pdf {.center}
+
+-   Para essa biblioteca usaremos linhas de comando.
+
+-   **Dica da aula 1**, apontar o R para o diretório onde estão localizados os arquivos.
+
+-   Vá o painel output, aba files.
+
+-   Você verá algo similar ao seus sistema de arquivo, clique na pasta que seu arquivo está
+
+## Ler arquivos .pdf {.center}
+
+![](Aula3_files/figure-html/Fig12.png){fig-align="center" width="450"}
+
+## Ler arquivos .pdf {.center}
+
+-   Agora, clique na seta ao lado do ícone da engrenagem e selecione Set As Working Directory
+
+![](Aula3_files/figure-html/Fig13.png){fig-align="center" width="450"}
+
+## Ler arquivos .pdf {.center}
+
+-   Vamos carregar a biblioteca `pdftools`.
+
+```{r}
+#| echo: true
+#| eval: true
+library(pdftools)
+```
+
+## Ler arquivos .pdf {.center}
+
+-   Vamos utilizar o comando `list.files` para listar os nomes dos arquivos com extensão .pdf
+
+```{r}
+#| echo: true
+#| eval: true
+
+arquivos <- list.files(pattern = "pdf$")
+arquivos
+
+```
+
+## Ler arquivos .pdf {.center}
+
+-   A função pdf extrai o texto dos arquivos
+
+```{r}
+#| echo: true
+#| eval: true
+
+opiniao = pdf_text(arquivos)
+opiniao
+
+```
+
+## Ler arquivos .pdf {.center}
+
+Se quiser mostrar somente a primeira página, faça
+
+```{r}
+#| echo: true
+#| eval: true
+cat(opiniao[[1]])
+```
