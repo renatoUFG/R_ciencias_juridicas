@@ -1,0 +1,436 @@
+---
+title: "Aula 4"
+author: "Renato Rodrigues Silva"
+format:
+  revealjs:
+    smaller: true
+    scrollable: true
+    theme: serif
+---
+
+## Objetivo da aula {.center}
+
+-   O objetivo da aula é ensinar ao aluno:
+
+-   Calcular medidas de tendência central: média e mediana.
+
+-   Calcular medidas de posição: quantis
+
+-   Calcular medidas de dispersão: variância.
+
+-   Fazer gráficos:
+
+    -   Histograma, gráficos de barras e box plot.
+
+------------------------------------------------------------------------
+
+## Empresa MB {.center}
+
+-   Esse exemplo foi obtido a partir desse livro [aqui](https://www.amazon.com.br/Estat%C3%ADstica-B%C3%A1sica-Wilton-Bussab/dp/8547220224).
+-   Nesse conjunto de dados, temos as seguintes variáveis
+    -   N: indexa as observações;
+    -   estado_civil: indica o estado civíl de cada funcionário;
+    -   grau_instrucao: indica o grau de instrução de cada funcionário (ensino fundamental, médio, superior)
+    -   n_filhos: indica o número de filhos de cada funcionário
+    -   idade_anos: representa a idade dos funcionários (calculada em anos)
+    -   reg_procedencia: indica a região de procedência dos funcionários (capital, interior e outra).
+
+------------------------------------------------------------------------
+
+## Média artimética {.center}
+
+-   $$
+    \bar{x} = \frac{x_1 + x_2 + \ldots +  x_n}{n}
+    $$
+
+-   Ou seja, a média consiste em somar todos os valores observados e dividir pelo número de observações.
+
+------------------------------------------------------------------------
+
+## Média artimética {.center}
+
+Vamos ler os dados.
+
+```{r}
+#| echo: true
+#| eval: true
+library(readr)
+dadosMB = read_delim("EmpresaMB.csv")
+```
+
+Agora, vamos calcular a média dos salários:
+
+```{r}
+#| echo: true
+#| eval: true
+
+mean(dadosMB$salario)
+
+```
+
+Podemos calcular também a média do número de filhos
+
+```{r}
+#| echo: true
+#| eval: true
+mean(dadosMB$n_filhos)
+```
+
+Ops!! Ele não calculou porque tinha dados faltantes. Vamos refazer
+
+```{r}
+#| echo: true
+#| eval: true
+mean(dadosMB$n_filhos, na.rm =TRUE)
+```
+
+## Mediana {.center}
+
+-   Mediana é o ponto central dos dados, ou seja é o valor que separa os dados em 50% inferiores e 50 % superiores.
+
+    [![Fonte: BYJU'S](Aula4_files/figure-html/Fig1.png)](https://byjus.com/maths/median/)
+
+## Mediana {.center}
+
+Vamos calcular a mediana dos salários:
+
+```{r}
+#| echo: true
+#| eval: true
+
+median(dadosMB$salario)
+
+```
+
+A mediana nos diz que 50% dos funcionários ganham até 1016,5 unidades monetárias.
+
+Vamos calcular a mediana do número de filhos.
+
+```{r}
+#| echo: true
+#| eval: true
+
+median(dadosMB$n_filhos, na.rm = TRUE)
+```
+
+A mediana nos diz que 50% dos funcionários tem até 2 filhos.
+
+## Quantis {.center}
+
+-   Quantis são generalizações da mediana no sentido que agora eu posso separar os dados em 25% inferiores e 75 % superiores, 75 % inferiores, 25% superiores e assim por diante.
+
+-   Os quantis mais usados em estatística descritiva estão resumidos na função `fivenum.`
+
+## Quantis {.center}
+
+[![Fonte: Prepnuggest](Aula4_files/figure-html/Fig2.jpg)](https://prepnuggets.com/glossary/quantile/)
+
+------------------------------------------------------------------------
+
+## Quantis {.center}
+
+Vamos calcular quantis para a variável salário.
+
+```{r}
+#| echo: true
+#| eval: true
+
+fivenum(dadosMB$salario)
+```
+
+##### Interpretação:
+
+-   O menor salário da empresa é 400,0.
+
+-   25% dos funcionários recebem um salário de até 751,5
+
+-   50% dos funcionários recebem um salário de até 1016,5
+
+-   75% dos funcionários recebem um salário de até 1427.
+
+-   O maior salário que a empresa oferece é 2330,0.
+
+------------------------------------------------------------------------
+
+## Variância {.center}
+
+-   A variância serve para nós respondermos a seguinte pergunta:
+
+-   O nosso conjunto de dados está concentrado ou disperso em torno da média ?
+
+-   A resposta dessa pergunta é muito importante em vários contextos. Para ilustrar essa importância, vamos estudar um exemplo hipotético
+
+------------------------------------------------------------------------
+
+## Ativos financeiros {.center}
+
+-   Suponha a existência de dois ativos financeiros. O primeiro seria uma ação de uma empresa e o segundo o tesouro direto.
+
+-   Para cada 1000 reais investidos, a ação rendeu nos últimos 5 meses, os valores 200, 400, 150, 500, 250;
+
+    -   resultando em uma rentabilidade média de 300 reais.
+
+-   Por sua vez, para os mesmos 1000 reais investidos, o tesouro direto rendeu: 280, 310, 290, 250, 310;
+
+    -   resultando em uma rentabilidade média de 288.
+
+-   Em quais dos investimentos você investiria o seu dinheiro? Justifique a sua resposta.
+
+------------------------------------------------------------------------
+
+## Ativos financeiros {.center}
+
+-   Como podemos perceber os dados de rentabilidade de ações tem maior média, no entanto, as observações dispersos em torno da média.
+
+-   Por outro lado, para os dados de tesouro direto, observamos uma média menor, entretanto, os dados estão concentrados em torno da média.
+
+-   Nesse contexto, a variância é uma medida que resume este tipo de informação.
+
+------------------------------------------------------------------------
+
+## Variância {.center}
+
+-   Define-se a variância como a soma dos quadrados dos desvios em relação a média dividido pelo número de observação menos 1.
+
+$$
+    s^2 = \frac{(x_1 - \bar{x})^2 + (x_2 - \bar{x})^2 + \ldots +  (x_n - \bar{x})^2 }{n-1}
+$$
+
+-   No software R, podemos calcular a variância da rentabilidade das ações e do tesouro direto da seguinte maneira.
+
+```{r}
+#| echo: true
+#| eval: true
+
+acoes = c(200, 400, 150, 500, 250)
+var(acoes)
+
+tesouro = c(280, 310, 290, 250, 310)
+var(tesouro)
+```
+
+------------------------------------------------------------------------
+
+## Gráfico no R {.center}
+
+-   Vamos agora aprender a visualizar os dados através de gráficos.
+
+-   Para isso vamos utilizar a biblioteca `ggplot2`.
+
+[![Fonte: R for ecologists](Aula4_files/figure-html/Fig3.png){width="500"}](https://www.rforecology.com/post/a-simple-introduction-to-ggplot2/)
+
+------------------------------------------------------------------------
+
+## Gráfico no R - Ex: Gráfico de Barras {.center}
+
+::: columns
+::: {.column width="40%"}
+-   Um gráfico de barras é composto por:
+
+    -   Eixo X que descreve as categorias, nesse caso, as regiões de procedência (capital, interior, outra).
+
+    -   Eixo Y que apresenta a frquencia absoluta (contagem) ou relativa (% com relação ao total) de cada categoria.
+:::
+
+::: {.column width="60%"}
+![](Aula4_files/figure-html/Fig4.png)
+:::
+:::
+
+------------------------------------------------------------------------
+
+## Gráfico no R {.center}
+
+-   O primeiro argumento a ser passado a função `ggplot` é o conjunto de dados que ele deve usar.
+
+-   O argumento dessa função deve ser um `data.frame` que contêm seus dados.
+
+------------------------------------------------------------------------
+
+## Gráfico no R {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+
+library(ggplot2)
+ggplot(dadosMB)
+
+```
+
+------------------------------------------------------------------------
+
+## Gráfico no R {.center}
+
+#### Componentes estéticos
+
+-   Observe que a função anterior não é suficiente para definir um gráfico.
+
+-   O próximo passo é adicionar componentes estéticos ao gráfico.
+
+-   `ggplot2` considera eixo X e eixo Y como estética, assim como: cor, tamanho, forma, preenchimento e etc ..
+
+-   Dependendo do tipo de gráfico, você pode definir o componente estético eixo Y, na função que define a camada.
+
+-   Para o gráfico de barras, inicialmente, vamos definir somente o eixo X. O eixo Y será definido juntamente com as camadas.
+
+## Gráfico no R {.center}
+
+```{r}
+ggplot(dadosMB, aes(x=reg_procedencia))
+```
+
+## Gráfico no R {.center}
+
+#### Camadas
+
+-   Ainda não temos nosso gráfico de barras, pois falta as camadas.
+
+-   As camadas em `ggplot2` são também chamadas de ‘geoms’.
+
+-   Uma vez que a base é feita, você pode adicionar camadas uma em cima da outra.
+
+-   Todas as possíveis camadas podem ser encontradas em <http://ggplot2.tidyverse.org/reference/>
+
+## Gráfico no R {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=reg_procedencia)) + 
+  geom_bar(col="black", fill="red")
+```
+
+## Gráfico no R {.center}
+
+-   Já temos o gráfico de barras, mas agora faremos algumas modificações.
+
+-   Vamos trocar a frequência absoluta para frequência relativa.
+
+## Gráfico no R {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=reg_procedencia)) + 
+  geom_bar(col="black", fill="red", 
+           aes(y = (..count..)/sum(..count..)))
+```
+
+## Gráfico no R {.center}
+
+#### Temas e Rótulos
+
+-   Agora que você desenhou as partes principais do grafico, você poderia querer adicionar títulos e mudar rótulos dos eixos X e Y.
+
+-   Isso pode ser feito com a camada labs. Entretanto, manipular o tamanho e cor dos “labels” é trabalho da camada “Theme”.
+
+## Gráfico no R {.center}
+
+#### Temas e Rótulos
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=reg_procedencia)) + 
+  geom_bar(col="black", fill="red", aes(y = (..count..)/sum(..count..)))+
+  labs( title = "Gráfico de Barras", x="Regiao de Procedencia", y="Freq. Relativa")
+
+```
+
+
+## Gráfico no R {.center}
+
+#### Temas e Rótulos
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=reg_procedencia)) + 
+  geom_bar(col="black", fill="red", aes(y = (..count..)/sum(..count..)))+
+  labs( title = "Gráfico de Barras", x="Regiao de Procedencia", y="Freq. Relativa") +theme_bw()
+
+```
+
+## Gráfico no R {.center}
+
+#### Outros gráficos
+
+-   Uma vez que aprendemos fazer um gráfico, não é difícil fazer outros.
+
+-   Por exemplo, vamos fazer um histograma para variável salário.
+
+-   Para isso,  praticamente nosso trabalho será trocar os eixos, as camadas e colocar os rótulos apropriados.
+
+
+## Gráficos no R  {.center}
+
+::: columns
+::: {.column width="50%"}
+#### Gráficos de Barras
+
+```{r}
+#| echo: true
+#| eval: false
+ggplot(dadosMB, aes(x=reg_procedencia)) + 
+  geom_bar(col="black", fill="red", 
+  aes(y = (..count..)/sum(..count..)))+
+  labs( title = "Gráfico de Barras", 
+  x="Regiao de Procedencia", 
+  y="Freq. Relativa") +theme_bw()
+
+```
+:::
+
+::: {.column width="50%"}
+
+#### Histogramas
+
+```{r}
+#| echo: true
+#| eval: false
+ggplot(dadosMB, aes(x=salario)) + 
+  geom_histogram(bins=5, 
+  col="black", 
+  fill="red", aes(y=..density..))+
+  labs( title = "Histograma", 
+  x="Salário", y="Freq. Relativa") 
+  +theme_bw()
+```
+:::
+:::
+
+
+
+## Histograma no R `geom_histogram` {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=salario)) + 
+  geom_histogram(bins=5,
+  col="black", fill="red", aes(y=..density..))+
+  labs( title = "Histograma", x="Salário", y="Freq. Relativa") +theme_bw()
+```
+
+
+## Box plot no R `geom_boxplot` {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x="", y=salario)) + 
+  geom_boxplot(fill = "white", colour = "#3366FF")+
+  labs( title = "Box Plot", x=" ", y="Salário") +theme_bw()
+```
+
+
+## Box plot no R `geom_boxplot` {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+ggplot(dadosMB, aes(x=reg_procedencia, y=salario)) + 
+  geom_boxplot(fill = "white", colour = "#3366FF")+
+  labs( title = "Box Plot", x=" ", y="Salário") +theme_bw()
+```
