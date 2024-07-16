@@ -1,0 +1,311 @@
+---
+title: "Aula 5"
+author: "Renato Rodrigues Silva"
+format:
+  revealjs:
+    smaller: true
+    scrollable: true
+    theme: serif
+---
+
+## Objetivo da aula {.center}
+
+-   O objetivo da aula é ensinar ao aluno:
+
+    -   Utilizar as principais funções da biblioteca tjsp
+    -   Funções básicas de manipulações de dados.
+
+## Introdução {.center}
+
+-   Essa aula foi forte baseada no material disponibilizado pelo [Prof. José de Jesus Filho](https://github.com/jjesusfilho).
+
+-   O Prof. José de Jesus Filho escreveu várias bibliotecas, no entanto, estudaremos apenas a biblioteca [tjsp](https://github.com/jjesusfilho/tjsp).
+
+-   Na segunda parte da aula, usaremos o material do [Hadley Wickham](https://r4ds.had.co.nz/)
+
+## Biblioteca `tjsp` {.center}
+
+-   A biblioteca `tjsp` não está no [CRAN](https://cran.r-project.org/), portanto a forma de como fazer a instalação será outra.
+
+-   O professor José Jesus disponibilizou a biblioteca no github dele.
+
+-   Primeiro passo, vamos instalar um pacote que permite a instalação de pacotes a partir de páginas de github.
+
+-   Clique na aba packages do painel output e depois digite remotes e clique em install.
+
+## Biblioteca `tjsp` {.center}
+
+![](Aula5_files/figure-html/Fig1.png)
+
+## Biblioteca `tjsp` {.center}
+
+![](Aula5_files/figure-html/Fig2.png){width="400"}
+
+## Biblioteca `tjsp` {.center}
+
+-   Agora, vamos utilizar linhas de comando, para instalar a biblioteca `tjsp`.
+
+```{r}
+#| eval: false
+#| echo: true
+remotes::install_github("jjesusfilho/tjsp")
+```
+
+-   `remotes::` é uma linha de comando para você usar uma função da biblioteca remotes, sem a necessidade de carregar todas as funções dela.
+
+-   `install_github` é a função para você instalar qualquer biblioteca do R que esteja em um github.
+
+-   `"jjesusfilho/tjsp"` é uma string que indica o caminho da localização da pasta da biblioteca `tjsp.`
+
+## Biblioteca `tjsp` {.center}
+
+-   Na biblioteca `tjsp,` temos três tipos de funções:
+
+    -   Funções que fazem download de arquivos em .html de decisões de primeira e segunda instância para um diretório indicado pelo usuário.
+
+    -   Funções que leem as informações contidas nos arquivos .html e as dispôem numa tabela.
+
+    -   Funções que auxiliam no trabalho de transformação dos dados lidos pelo grupo anterior.
+
+    -   Maiores informações no próprio site da [biblioteca](https://github.com/jjesusfilho/tjsp).
+
+## Baixar arquivos de jurisprudência {.center}
+
+-   No site do TJSP tem informações a respeito das buscas de arquivos de [jurisprudência](https://www.tjsp.jus.br/CanaisAtendimentoRelacionamento/DuvidasFrequentes/Jurisprudencia).
+
+-   Para baixar os arquivos vamos primeiro criar um diretório para colocá-lo.
+
+-   Vamos chamá-lo de Juris.
+
+## Baixar arquivos de jurisprudência {.center}
+
+-   Para isso, vamos na aba files do painel output.
+
+-   clique no primeiro ícone e coloque o nome do diretório;
+
+-   defina esse diretório, como diretório de trabalho;
+
+-   agora é só carregar a biblioteca `tjsp` e utilizar o comando `tjsp_baixar_cjsg` para baixar os arquivos .html para o diretório Juris.
+
+-   Outra possibilidade é usar `tjsp::tjsp_baixar_cjsg`, dessa forma você não precisa carregar a biblioteca.
+
+## Baixar arquivos de jurisprudência {.center}
+
+![](Aula5_files/figure-html/Fig3.png)
+
+## Baixar arquivos de jurisprudência {.center}
+
+![](Aula5_files/figure-html/Fig4.png)
+
+## Baixar arquivos de jurisprudência {.center}
+
+![](Aula5_files/figure-html/Fig5.png)
+
+## Baixar arquivos de jurisprudência {.center}
+
+![](Aula5_files/figure-html/Fig6.png)
+
+## Baixar arquivos de jurisprudência {.center}
+
+![](Aula5_files/figure-html/Fig7.png)
+
+## Baixar arquivos de jurisprudência {.center}
+
+```{r}
+#| echo: true
+#| eval: false
+
+tjsp::tjsp_baixar_cjsg(
+  livre="concurso público", aspas = TRUE, diretorio="Juris", inicio = "01/01/2024", 
+  fim="15/01/2024")
+
+```
+
+## Ler decisões em segunda instância {.center}
+
+```{r}
+#| echo: true
+#| eval: true
+
+tabela_concurso = 
+tjsp::tjsp_ler_cjsg(diretorio = "Juris")
+print(tabela_concurso)
+
+```
+
+## Manipulação de dados  {.center}
+
+-   Nessa segunda parte da aula, vamos fazer algumas manipulações de dados.
+
+-   Para isso vamos usar a biblioteca `dplyr`.
+
+-   No entanto, é mais conveniente instalar o conjunto de bibliotecas `tidyverse` que inclui `dplyr`, `ggplot2` e outras.
+
+## Manipulação de dados  {.center}
+
+![](Aula5_files/figure-html/Fig8.png)
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+-   A função `filter` do pacote `dplyr` filtra linhas em um `data.frame`.
+
+-   Exemplo: Desejamos filtrar todos as informações da comarca de São Paulo.
+
+```{r}
+#| echo: true
+#| eval: true
+dplyr::filter(tabela_concurso, 
+              comarca == "São Paulo")
+```
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+![](Aula5_files/figure-html/Fig9.png)
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+-   Exemplo: Desejamos filtrar todos as informações do código do acórdão 17491974 ou 17486465.
+
+```{r}
+#| echo: true
+#| eval: true
+dplyr::filter(tabela_concurso, 
+              cdacordao == "17491974" |
+              cdacordao == "17486465")
+
+```
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+-   Exemplo: Desejamos filtrar todos as informações da comarca de São Paulo e classe Apelação cível.
+
+```{r}
+#| echo: true
+#| eval: true
+dplyr::filter(tabela_concurso, comarca == "São Paulo" & classe == "Apelação Cível")
+
+```
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+-   Veja que nesse caso, podemos escrever simplesmente assim.
+
+```{r}
+#| echo: true
+#| eval: true
+dplyr::filter(tabela_concurso, comarca == "São Paulo" , classe == "Apelação Cível")
+
+```
+
+## Manipulação de dados {.center}
+
+### Filtrar linhas
+
+-   Exemplo: Desejamos filtrar todos as informações da comarca de São Paulo e classe Apelação cível e Apelação.
+
+-   Caso tenhamos muitas categorias na mesma coluna, podemos utilizar o operador `%in%`
+
+```{r}
+#| echo: true
+#| eval: true
+dplyr::filter(tabela_concurso, 
+              comarca == "São Paulo",                   classe %in% 
+c("Apelação Cível", "Apelação"))
+
+```
+
+## Manipulação de dados {.center}
+
+### Ordenar linhas
+
+-   Podemos ordernar linhas de uma `data.frame` na ordem crescente ou decrescente.
+
+-   Ordenar de forma crescente a tabela de acordo com a comarca e o código do acórdão.
+
+    ```{r}
+    dplyr::arrange(tabela_concurso, 
+            comarca,
+            cdacordao
+          )
+    ```
+
+## Manipulação de dados {.center}
+
+### Ordenar linhas
+
+-   Ordenar de forma decrescente a tabela de acordo com a comarca e o código do acórdão.
+
+    ```{r}
+    #| echo: true
+    #| eval: true
+
+    dplyr::arrange(tabela_concurso, 
+            desc(comarca),
+            desc(cdacordao),
+          )
+    ```
+
+## Manipulação de dados {.center}
+
+### Selecionar colunas 
+
+-   A função `select` seleciona as colunas desejadas.
+
+-   Exemplo selecionar as colunas referente as comarcas e o relator
+
+```{r}
+#| echo: true
+#| eval: true
+
+dplyr::select(tabela_concurso, 
+        comarca,
+        relator
+      )
+```
+
+## Manipulação de dados {.center}
+
+### Selecionar colunas 
+
+-   Às vezes, é mais conveniente usar a função `one_of` . Por exemplo.
+
+```{r}
+#| echo: true
+#| eval: true
+
+variaveis = c("cdacordao",
+              "classe",
+              "relator")
+
+dplyr::select(tabela_concurso, one_of(variaveis))
+```
+
+## Manipulação de dados {.center}
+
+### Adicionar novas colunas 
+
+-   A função `mutate` permite adicionar novas colunas.
+
+    Exemplo: Vamos adicionar uma coluna chamada procedencia, que indica se a comarca é da capital ou do interior.
+
+-   Posteriormente, vamos selecionar apenas as colunas da comarca e procedencia
+
+```{r}
+#| echo: true
+#| eval: true
+
+nova_tabela = dplyr::mutate(tabela_concurso, procedencia = 
+                ifelse(comarca == "São Paulo", "capital", "interior"))
+
+dplyr::select(nova_tabela, comarca, procedencia)
+```
